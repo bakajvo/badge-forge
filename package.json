@@ -3,10 +3,32 @@
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "author": "Vojtěch Bakaj",
+  "type": "module",
+  "bin": {
+    "badge-forge": "./dist/index.js"
+  },
+  "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "badge-forge generate",
+    "build": "tsc",
+    "link": "npm link",
+    "unlink": "npm unlink -g badge-forge"
+  },
+  "dependencies": {
+    "badge-maker": "^4.1.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "cosmiconfig": "^9.0.0",
+    "install": "^0.13.0",
+    "jsonpath-plus": "^10.3.0",
+    "npm": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/node": "^22.13.2",
+    "prettier": "^3.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }

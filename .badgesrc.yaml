@@ -1,0 +1,13 @@
+badges:
+  - message: '{} total'
+    label: Users
+    source: https://reqres.in/api/unknown
+    path: $.total
+    labelColor: '#555'
+    color: '#4c1'
+  - message: Forge 🔥🔨
+    label: Badge
+  - message: '{}'
+    label: Version
+    source: package.json
+    path: $.version
