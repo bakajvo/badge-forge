@@ -1,4 +1,10 @@
 # 🛠️ Badge Forge – Forge Your Own Badges! 🔥
+
+![Badge Forge](badges/Badge.svg)
+![Badge Forge version](badges/Version.svg)
+![Github stars](badges/Stars.svg)
+![Code coverage](badges/Coverage.svg)
+
 Why waste time manually adding badges when you can forge them like a pro? ⚒️🔥
 
 Badge Forge transforms your configuration into a glorious set of shields.io badges, making your GitHub README shine ✨.
