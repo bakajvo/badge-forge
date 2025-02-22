@@ -1,0 +1,22 @@
+name: Update badges
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - run: npm link
+      - run: badge-forge generate
+      - run: git add badges
+      - run: git commit -m 'Update badges' -- badges
+      - run: git push origin
+
