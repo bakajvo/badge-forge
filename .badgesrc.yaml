@@ -1,13 +1,19 @@
 badges:
-  - message: '{} total'
-    label: Users
-    source: https://reqres.in/api/unknown
-    path: $.total
-    labelColor: '#555'
-    color: '#4c1'
-  - message: Forge 🔥🔨
-    label: Badge
-  - message: '{}'
-    label: Version
+  - label: Stars
+    message: '{} ⭐'
+    source: https://api.github.com/search/repositories?q=%22badge-forge%22
+    path: $.items[?(@.full_name=='bakajvo/badge-forge')].stargazers_count
+    color: 3dc8ff
+  - label: Badge
+    message: Forge 🔥🔨
+    color: b58259
+  - label: Version
+    message: '{}'
     source: package.json
     path: $.version
+    color: 6aff3d
+  - label: Coverage
+    message: '{}%'
+    source: coverage/coverage-summary.json
+    path: $.total.statements.pct
+    color: db0921

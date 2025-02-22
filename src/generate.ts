@@ -1,8 +1,8 @@
 import chalk from 'chalk'
 import { Format, makeBadge } from 'badge-maker'
 import { getConfig } from './config.js'
-import { cli, isDebug } from './index.js'
-import { readFile, existsSync } from 'node:fs'
+import { cli } from './index.js'
+import { existsSync, readFile } from 'node:fs'
 import { JSONPath } from 'jsonpath-plus'
 import { getFilename, interpolateString, saveSVG } from './utils.js'
 import path from 'path'
@@ -55,7 +55,7 @@ const getDataFromSource = (source: string): Promise<object> => {
 const generateBadgeAndSave = (
     message: string,
     format: Omit<Format, 'message'>,
-    outputPath: string
+    outputPath: string,
 ) => {
     const svgBadge = makeBadge({
         message,
@@ -90,17 +90,16 @@ export const generate = async () => {
                 const data = await getDataFromSource(source)
 
                 let params: Array<unknown> = []
-                Array.isArray(path)
-                    ? path
-                    : [path].forEach((pointer) => {
-                          const result = JSONPath({ json: data, path: pointer })
-                          params = params.concat(result)
-                      })
+                const paths = Array.isArray(path) ? path : [path]
+                paths.forEach((pointer) => {
+                    const result = JSONPath({ json: data, path: pointer })
+                    params = params.concat(result)
+                })
                 Logger.info(`Extracted ${params} from ${source}`)
                 generateBadgeAndSave(
                     interpolateString(message, params),
                     badgeFormat,
-                    outputPath
+                    outputPath,
                 )
             } catch (error: unknown) {
                 Logger.error((error as Error).message)

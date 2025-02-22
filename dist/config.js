@@ -6,8 +6,9 @@ export const getConfig = async () => {
     try {
         const result = await explorer.search();
         if (result) {
-            isDebug &&
+            if (isDebug) {
                 Logger.debug(`Loaded config:\n${JSON.stringify(result.config, null, 2)}`);
+            }
             return result.config;
         }
         else {
@@ -16,7 +17,7 @@ export const getConfig = async () => {
         }
     }
     catch (error) {
-        Logger.error(`Failed to find config.`);
+        Logger.error(`Failed to find config. Reason: ${error}.`);
         return null;
     }
 };

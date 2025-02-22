@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { makeBadge } from 'badge-maker';
 import { getConfig } from './config.js';
 import { cli } from './index.js';
-import { readFile, existsSync } from 'node:fs';
+import { existsSync, readFile } from 'node:fs';
 import { JSONPath } from 'jsonpath-plus';
 import { getFilename, interpolateString, saveSVG } from './utils.js';
 import path from 'path';
@@ -74,12 +74,11 @@ export const generate = async () => {
             try {
                 const data = await getDataFromSource(source);
                 let params = [];
-                Array.isArray(path)
-                    ? path
-                    : [path].forEach((pointer) => {
-                        const result = JSONPath({ json: data, path: pointer });
-                        params = params.concat(result);
-                    });
+                const paths = Array.isArray(path) ? path : [path];
+                paths.forEach((pointer) => {
+                    const result = JSONPath({ json: data, path: pointer });
+                    params = params.concat(result);
+                });
                 Logger.info(`Extracted ${params} from ${source}`);
                 generateBadgeAndSave(interpolateString(message, params), badgeFormat, outputPath);
             }
