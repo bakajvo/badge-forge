@@ -14,6 +14,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
+      - run: npm run test:coverage
       - run: npm link
       - run: badge-forge generate
       - run: git add badges
