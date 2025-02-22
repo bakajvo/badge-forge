@@ -4,6 +4,7 @@
 ![Badge Forge version](badges/Version.svg)
 ![Github stars](badges/Stars.svg)
 ![Code coverage](badges/Coverage.svg)
+[![Continuous integration](https://github.com/bakajvo/badge-forge/actions/workflows/ci.yml/badge.svg)](https://github.com/bakajvo/badge-forge/actions/workflows/ci.yml)
 
 Why waste time manually adding badges when you can forge them like a pro? ⚒️🔥
 
