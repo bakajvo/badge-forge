@@ -8,6 +8,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - run: git config --global user.email "vojtech@bakaj.cz"
+      - run: git config --global user.name "Technical user"
       - uses: actions/checkout@v4
         with:
           fetch-depth: '0'
