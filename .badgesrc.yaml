@@ -17,3 +17,7 @@ badges:
     source: coverage/coverage-summary.json
     path: $.total.statements.pct
     color: db0921
+  - label: Code style
+    message: prettier
+    color: ff69b4
+    filename: Prettier
