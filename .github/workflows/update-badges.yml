@@ -2,14 +2,15 @@ name: Update badges
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: git config --global user.email "vojtech@bakaj.cz"
-      - run: git config --global user.name "Technical user"
       - uses: actions/checkout@v4
         with:
           fetch-depth: '0'
@@ -23,6 +24,11 @@ jobs:
       - run: npm link
       - run: badge-forge generate
       - run: git add badges
-      - run: git commit --allow-empty -m 'Update badges' -- badges
-      - run: git push origin
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Auto-update badges" || echo "No changes to commit"
+          git push
 
