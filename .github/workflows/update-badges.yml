@@ -23,6 +23,6 @@ jobs:
       - run: npm link
       - run: badge-forge generate
       - run: git add badges
-      - run: git commit -m 'Update badges' -- badges
+      - run: git commit --allow-empty -m 'Update badges' -- badges
       - run: git push origin
 
