@@ -4,29 +4,30 @@
 name: Publish Node.js Package
 
 on:
-  release:
-    types: [created]
-
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        description: Release version
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm ci
-      - run: npm run build
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+          fetch-depth: '0'
+          token: '${{ secrets.GH_TOKEN }}'
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+      - run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - run: npm ci
+      - run: npm run build
+      - run: npm version ${{ inputs.version }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
